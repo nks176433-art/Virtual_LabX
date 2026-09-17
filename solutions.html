@@ -1,0 +1,975 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LabX - Acid, Base or Neutral</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: white;
+            color: #222;
+        }
+
+        .header {
+            text-align: center;
+            padding: 30px 20px 10px;
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 34px;
+            color: #222;
+        }
+
+        .header p {
+            margin-top: 8px;
+            color: #666;
+            font-size: 16px;
+        }
+
+        .score {
+            position: absolute;
+            top: 25px;
+            right: 35px;
+            background: #222;
+            color: white;
+            padding: 12px 20px;
+            border-radius: 20px;
+            font-weight: bold;
+        }
+
+        .mission {
+            width: 85%;
+            max-width: 950px;
+            margin: 20px auto;
+            padding: 18px 25px;
+            background: #f5f5f5;
+            border-left: 5px solid #333;
+            border-radius: 8px;
+        }
+
+        .mission h2 {
+            margin: 0 0 8px;
+        }
+
+        .mission p {
+            margin: 0;
+            line-height: 1.6;
+        }
+
+        .lab-area {
+            width: 90%;
+            max-width: 1100px;
+            margin: 25px auto;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 22px;
+        }
+
+        /* LITMUS AREA */
+
+        .litmus-area {
+            display: flex;
+            justify-content: center;
+            gap: 45px;
+            margin: 20px 0 45px;
+            flex-wrap: wrap;
+        }
+
+        .paper-box {
+            text-align: center;
+        }
+
+        .paper {
+            width: 38px;
+            height: 120px;
+            margin: auto;
+            border-radius: 5px;
+            cursor: grab;
+            border: 2px solid #777;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.15);
+        }
+
+        .paper:active {
+            cursor: grabbing;
+        }
+
+        .red-paper {
+            background: #e53935;
+        }
+
+        .blue-paper {
+            background: #1976d2;
+        }
+
+        .paper-label {
+            margin-top: 8px;
+            font-weight: bold;
+        }
+
+        .paper-count {
+            font-size: 13px;
+            color: #777;
+            margin-top: 4px;
+        }
+
+        /* FLASKS */
+
+        .flasks {
+            display: flex;
+            justify-content: space-around;
+            gap: 40px;
+            flex-wrap: wrap;
+            margin-top: 30px;
+        }
+
+        .flask-card {
+            width: 260px;
+            text-align: center;
+            padding: 20px;
+            border: 2px solid #ddd;
+            border-radius: 15px;
+            background: #fafafa;
+            transition: 0.2s;
+        }
+
+        .flask-card.drag-over {
+            border-color: #333;
+            background: #f0f0f0;
+            transform: scale(1.03);
+        }
+
+        .flask {
+            position: relative;
+            width: 150px;
+            height: 190px;
+            margin: 10px auto 15px;
+        }
+
+        .flask-neck {
+            position: absolute;
+            width: 55px;
+            height: 75px;
+            left: 47px;
+            top: 0;
+            border: 4px solid #555;
+            border-bottom: none;
+            background: rgba(255,255,255,0.8);
+        }
+
+        .flask-body {
+            position: absolute;
+            width: 150px;
+            height: 120px;
+            left: 0;
+            bottom: 0;
+            border: 4px solid #555;
+            border-radius: 0 0 35px 35px;
+            background: rgba(230,240,245,0.7);
+            overflow: hidden;
+        }
+
+        .liquid {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 55%;
+            background: #dceeff;
+            transition: 0.3s;
+        }
+
+        .flask-number {
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .flask-status {
+            min-height: 25px;
+            color: #555;
+            font-size: 14px;
+        }
+
+        .drop-hint {
+            font-size: 13px;
+            color: #888;
+        }
+
+        /* RESULT */
+
+        .result {
+            width: 85%;
+            max-width: 850px;
+            margin: 30px auto;
+            padding: 20px;
+            text-align: center;
+            border-radius: 10px;
+            background: #f5f5f5;
+            display: none;
+        }
+
+        .result.show {
+            display: block;
+        }
+
+        /* QUESTIONS */
+
+        .quiz {
+            width: 85%;
+            max-width: 850px;
+            margin: 40px auto;
+            display: none;
+        }
+
+        .quiz.show {
+            display: block;
+        }
+
+        .quiz h2 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .question {
+            background: #fafafa;
+            border: 1px solid #ddd;
+            padding: 25px;
+            margin-bottom: 25px;
+            border-radius: 12px;
+        }
+
+        .question h3 {
+            margin-top: 0;
+        }
+
+        .options {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .option {
+            flex: 1;
+            min-width: 150px;
+            padding: 14px;
+            border: 2px solid #ccc;
+            border-radius: 8px;
+            background: white;
+            cursor: pointer;
+            font-size: 16px;
+            transition: 0.2s;
+        }
+
+        .option:hover {
+            border-color: #222;
+            background: #f2f2f2;
+        }
+
+        .option.correct {
+            border-color: #2e7d32;
+            background: #e8f5e9;
+        }
+
+        .option.wrong {
+            border-color: #c62828;
+            background: #ffebee;
+        }
+
+        .feedback {
+            margin-top: 15px;
+            font-weight: bold;
+            min-height: 22px;
+        }
+
+        .complete {
+            display: none;
+            text-align: center;
+            padding: 25px;
+            margin: 30px auto;
+            max-width: 600px;
+            border-radius: 12px;
+            background: #f5f5f5;
+        }
+
+        .complete.show {
+            display: block;
+        }
+
+        .complete h2 {
+            margin-top: 0;
+        }
+
+        .xp {
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        @media (max-width: 700px) {
+            .score {
+                position: static;
+                width: fit-content;
+                margin: 10px auto;
+            }
+
+            .flasks {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="score">
+        XP: <span id="score">0</span>
+    </div>
+
+    <div class="header">
+        <h1>🧪 Acid, Base or Neutral?</h1>
+        <p>Experiment like a scientist. The solutions are unknown.</p>
+    </div>
+
+    <div class="mission">
+        <h2>🔬 Your Mission</h2>
+
+        <p>
+           A farmer suspects something is wrong with the his soil and it might be that the soil is too acidic.
+           Test the contents below to figure out the type of solution they are and then find out which solution would be perfect for his soil.
+        </p>
+    </div>
+
+
+    <div class="lab-area">
+
+        <h2 class="section-title">Choose a Litmus Paper</h2>
+
+        <div class="litmus-area">
+
+            <div class="paper-box">
+                <div
+                    class="paper red-paper"
+                    draggable="true"
+                    data-paper="red"
+                    id="redPaper">
+                </div>
+
+                <div class="paper-label">Red Litmus</div>
+                <div class="paper-count">
+                    Drag into a flask
+                </div>
+            </div>
+
+
+            <div class="paper-box">
+                <div
+                    class="paper blue-paper"
+                    draggable="true"
+                    data-paper="blue"
+                    id="bluePaper">
+                </div>
+
+                <div class="paper-label">Blue Litmus</div>
+                <div class="paper-count">
+                    Drag into a flask
+                </div>
+            </div>
+
+        </div>
+
+
+        <h2 class="section-title">Unknown Solutions</h2>
+
+        <div class="flasks">
+
+            <!-- FLASK 1 -->
+
+            <div
+                class="flask-card"
+                data-solution="acid"
+                ondragover="allowDrop(event)"
+                ondrop="dropPaper(event)"
+            >
+
+                <div class="flask-number">Unknown Flask A</div>
+
+                <div class="flask">
+
+                    <div class="flask-neck"></div>
+
+                    <div class="flask-body">
+                        <div class="liquid"></div>
+                    </div>
+
+                </div>
+
+                <div class="flask-status" id="statusA">
+                    No test performed
+                </div>
+
+                <div class="drop-hint">
+                    Drop litmus paper here
+                </div>
+
+            </div>
+
+
+            <!-- FLASK 2 -->
+
+            <div
+                class="flask-card"
+                data-solution="base"
+                ondragover="allowDrop(event)"
+                ondrop="dropPaper(event)"
+            >
+
+                <div class="flask-number">Unknown Flask B</div>
+
+                <div class="flask">
+
+                    <div class="flask-neck"></div>
+
+                    <div class="flask-body">
+                        <div class="liquid"></div>
+                    </div>
+
+                </div>
+
+                <div class="flask-status" id="statusB">
+                    No test performed
+                </div>
+
+                <div class="drop-hint">
+                    Drop litmus paper here
+                </div>
+
+            </div>
+
+
+            <!-- FLASK 3 -->
+
+            <div
+                class="flask-card"
+                data-solution="neutral"
+                ondragover="allowDrop(event)"
+                ondrop="dropPaper(event)"
+            >
+
+                <div class="flask-number">Unknown Flask C</div>
+
+                <div class="flask">
+
+                    <div class="flask-neck"></div>
+
+                    <div class="flask-body">
+                        <div class="liquid"></div>
+                    </div>
+
+                </div>
+
+                <div class="flask-status" id="statusC">
+                    No test performed
+                </div>
+
+                <div class="drop-hint">
+                    Drop litmus paper here
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- EXPERIMENT RESULT -->
+
+    <div class="result" id="result">
+
+        <h2>🔬 Experiment Complete!</h2>
+
+        <p>
+            You have tested all three unknown solutions.
+        </p>
+
+        <p>
+            Now use your observations to answer the scientist's questions.
+        </p>
+
+    </div>
+
+
+    <!-- QUIZ -->
+
+    <div class="quiz" id="quiz">
+
+        <h2>🧠 Scientist's Questions</h2>
+
+
+        <!-- QUESTION 1 -->
+
+        <div class="question">
+
+            <h3>
+                1. Which type of solution releases H⁺ ions in water?
+            </h3>
+
+            <div class="options">
+
+                <button
+                    class="option"
+                    onclick="answerQuestion(this, 'correct', 1)">
+                    Acid
+                </button>
+
+                <button
+                    class="option"
+                    onclick="answerQuestion(this, 'wrong', 1)">
+                    Base
+                </button>
+
+                <button
+                    class="option"
+                    onclick="answerQuestion(this, 'wrong', 1)">
+                    Neutral
+                </button>
+
+            </div>
+
+            <div class="feedback" id="feedback1"></div>
+
+        </div>
+
+
+        <!-- QUESTION 2 -->
+
+        <div class="question">
+
+            <h3>
+                2. Which type of solution releases OH⁻ ions in water?
+            </h3>
+
+            <div class="options">
+
+                <button
+                    class="option"
+                    onclick="answerQuestion(this, 'wrong', 2)">
+                    Acid
+                </button>
+
+                <button
+                    class="option"
+                    onclick="answerQuestion(this, 'correct', 2)">
+                    Base
+                </button>
+
+                <button
+                    class="option"
+                    onclick="answerQuestion(this, 'wrong', 2)">
+                    Neutral
+                </button>
+
+            </div>
+
+            <div class="feedback" id="feedback2"></div>
+
+        </div>
+
+
+        <!-- QUESTION 3 -->
+
+        <div class="question">
+
+            <h3>
+                3. A solution turns blue litmus paper red. What does this observation indicate?
+            </h3>
+
+            <div class="options">
+
+                <button
+                    class="option"
+                    onclick="answerQuestion(this, 'correct', 3)">
+                    Acid
+                </button>
+
+                <button
+                    class="option"
+                    onclick="answerQuestion(this, 'wrong', 3)">
+                    Base
+                </button>
+
+                <button
+                    class="option"
+                    onclick="answerQuestion(this, 'wrong', 3)">
+                    Neutral
+                </button>
+
+            </div>
+
+            <div class="feedback" id="feedback3"></div>
+
+        </div>
+
+
+        <!-- QUESTION 4 -->
+
+        <div class="question">
+
+            <h3>
+                4. Which solution would be most suitable to help improve the farmer's soil?
+            </h3>
+
+            <div class="options">
+
+                <button
+                    class="option"
+                    onclick="answerQuestion(this, 'wrong', 4)">
+                    Acid
+                </button>
+
+                <button
+                    class="option"
+                    onclick="answerQuestion(this, 'correct', 4)">
+                    Base
+                </button>
+
+                <button
+                    class="option"
+                    onclick="answerQuestion(this, 'wrong', 4)">
+                    Neutral
+                </button>
+
+            </div>
+
+            <div class="feedback" id="feedback4"></div>
+
+        </div>
+
+    </div>
+
+
+    <!-- COMPLETION -->
+
+    <div class="complete" id="complete">
+
+        <h2>🎉 Experiment Solved!</h2>
+
+        <p>
+            Excellent work, Scientist!
+        </p>
+
+        <div class="xp">
+            +500 XP
+        </div>
+
+        <p>
+            Your observations and chemistry knowledge have been recorded.
+        </p>
+
+    </div>
+
+
+    <script>
+
+        let score = 0;
+
+        let tested = {
+            A: false,
+            B: false,
+            C: false
+        };
+
+        let questionsAnswered = {
+            1: false,
+            2: false,
+            3: false,
+            4: false
+        };
+
+
+        /*
+            DRAG START
+        */
+
+        document.querySelectorAll(".paper").forEach(paper => {
+
+            paper.addEventListener("dragstart", function(event) {
+
+                event.dataTransfer.setData(
+                    "paperType",
+                    this.dataset.paper
+                );
+
+            });
+
+        });
+
+
+        /*
+            ALLOW DROP
+        */
+
+        function allowDrop(event) {
+
+            event.preventDefault();
+
+            event.currentTarget.classList.add("drag-over");
+
+        }
+
+
+        /*
+            REMOVE DRAG HIGHLIGHT
+        */
+
+        document.querySelectorAll(".flask-card").forEach(flask => {
+
+            flask.addEventListener("dragleave", function() {
+
+                this.classList.remove("drag-over");
+
+            });
+
+        });
+
+
+        /*
+            DROP PAPER
+        */
+
+        function dropPaper(event) {
+
+            event.preventDefault();
+
+            let flask = event.currentTarget;
+
+            flask.classList.remove("drag-over");
+
+            let paperType =
+                event.dataTransfer.getData("paperType");
+
+            let solution =
+                flask.dataset.solution;
+
+            let flaskNumber =
+                flask.querySelector(".flask-number").textContent;
+
+            let statusElement =
+                flask.querySelector(".flask-status");
+
+
+            /*
+                DETERMINE FLASK LETTER
+            */
+
+            let letter;
+
+            if (flaskNumber.includes("A")) {
+                letter = "A";
+            }
+
+            else if (flaskNumber.includes("B")) {
+                letter = "B";
+            }
+
+            else {
+                letter = "C";
+            }
+
+
+            /*
+                ACID
+            */
+
+            if (solution === "acid") {
+
+                if (paperType === "blue") {
+
+                    statusElement.innerHTML =
+                        "🔴 Blue litmus changed to RED — Acidic!";
+
+                    statusElement.style.color = "#c62828";
+
+                }
+
+                else {
+
+                    statusElement.innerHTML =
+                        "Red litmus remained RED.";
+
+                    statusElement.style.color = "#555";
+
+                }
+
+            }
+
+
+            /*
+                BASE
+            */
+
+            else if (solution === "base") {
+
+                if (paperType === "red") {
+
+                    statusElement.innerHTML =
+                        "🔵 Red litmus changed to BLUE — Basic!";
+
+                    statusElement.style.color = "#1565c0";
+
+                }
+
+                else {
+
+                    statusElement.innerHTML =
+                        "Blue litmus remained BLUE.";
+
+                    statusElement.style.color = "#555";
+
+                }
+
+            }
+
+
+            /*
+                NEUTRAL
+            */
+
+            else {
+
+                statusElement.innerHTML =
+                    "No colour change — Neutral solution.";
+
+                statusElement.style.color = "#555";
+
+            }
+
+
+            /*
+                MARK AS TESTED
+            */
+
+            if (!tested[letter]) {
+
+                tested[letter] = true;
+
+                score += 50;
+
+                document.getElementById("score").textContent =
+                    score;
+
+            }
+
+
+            /*
+                CHECK IF ALL THREE TESTED
+            */
+
+            if (
+                tested.A &&
+                tested.B &&
+                tested.C
+            ) {
+
+                document.getElementById("result")
+                    .classList.add("show");
+
+                setTimeout(() => {
+
+                    document.getElementById("quiz")
+                        .classList.add("show");
+
+                    document.getElementById("quiz")
+                        .scrollIntoView({
+                            behavior: "smooth"
+                        });
+
+                }, 700);
+
+            }
+
+        }
+
+
+        /*
+            QUIZ ANSWERS
+        */
+
+        function answerQuestion(button, result, questionNumber) {
+
+            if (questionsAnswered[questionNumber]) {
+                return;
+            }
+
+            questionsAnswered[questionNumber] = true;
+
+            if (result === "correct") {
+
+                button.classList.add("correct");
+
+                score += 100;
+
+                document.getElementById("score")
+                    .textContent = score;
+
+                document.getElementById(
+                    "feedback" + questionNumber
+                ).textContent =
+                    "✓ Correct! Good scientific reasoning.";
+
+            }
+
+            else {
+
+                button.classList.add("wrong");
+
+                document.getElementById(
+                    "feedback" + questionNumber
+                ).textContent =
+                    "✗ Not quite. Think about the ions produced by the solution.";
+
+            }
+
+
+            /*
+                CHECK ALL QUESTIONS
+            */
+
+            if (
+                questionsAnswered[1] &&
+                questionsAnswered[2] &&
+                questionsAnswered[3] &&
+                questionsAnswered[4]
+            ) {
+
+                setTimeout(() => {
+
+                    document.getElementById("complete")
+                        .classList.add("show");
+
+                    document.getElementById("complete")
+                        .scrollIntoView({
+                            behavior: "smooth"
+                        });
+
+                }, 700);
+
+            }
+
+        }
+
+    </script>
+
+</body>
+</html>
+```

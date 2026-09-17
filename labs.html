@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>LabX - Virtual Laboratory</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #050816;
+            color: white;
+            overflow: hidden;
+        }
+
+        .container {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+        }
+
+        /* LEFT SIDE - PLANET */
+        .planet-section {
+            width: 55%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        .planet-section::before {
+            content: "";
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            background: #263b80;
+            filter: blur(120px);
+            opacity: 0.25;
+            border-radius: 50%;
+        }
+
+        .planet {
+            width: 85%;
+            max-width: 650px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* RIGHT SIDE - TEXT */
+        .content {
+            width: 45%;
+            padding: 40px;
+            text-align: left;
+        }
+
+        .small-text {
+            font-size: 14px;
+            letter-spacing: 4px;
+            color: #7aa7ff;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            font-size: 70px;
+            line-height: 0.95;
+            margin: 0;
+            letter-spacing: 2px;
+        }
+
+        h1 span {
+            color: #6da7ff;
+        }
+
+        .tagline {
+            font-size: 25px;
+            margin-top: 30px;
+            color: #eeeeee;
+        }
+
+        .description {
+            font-size: 17px;
+            line-height: 1.7;
+            color: #9da5b8;
+            max-width: 500px;
+        }
+
+        button {
+            margin-top: 25px;
+            padding: 15px 30px;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .start {
+            background: #6da7ff;
+            color: #050816;
+            border: none;
+        }
+
+        .scientist {
+            background: transparent;
+            color: white;
+            border: 1px solid #6da7ff;
+        }
+
+        button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(100, 150, 255, 0.25);
+        }
+
+        /* SMALL STARS */
+        .stars {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            background-image:
+                radial-gradient(white 1px, transparent 1px),
+                radial-gradient(white 1px, transparent 1px);
+            background-size: 120px 120px, 180px 180px;
+            background-position: 20px 30px, 80px 100px;
+            opacity: 0.25;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="stars"></div>
+
+    <div class="container">
+
+        <!-- PLANET -->
+        <div class="planet-section">
+            <img src="Screenshot_12-9-2026_25644_in.pinterest.com.jpeg" class="planet" alt="Planet">
+        </div>
+
+        <!-- TEXT -->
+        <div class="content">
+
+            <div class="small-text">
+                WELCOME, EXPLORER
+            </div>
+
+            <h1>
+                LITTLE<br>
+                <span>SCIENTISTS</span>
+            </h1>
+
+            <p class="tagline">
+                Explore. Experiment. Discover.
+            </p>
+
+            <p class="description">
+                Step into a world where curiosity becomes discovery.
+                Solve scientific mysteries, perform experiments,
+                collect evidence and think like a real scientist.
+            </p>
+
+            <button class="start" onclick="window.location.href='explore.html'">
+            START EXPLORING
+            </button>
+
+            <button class="scientist" onclick="window.location.href='scientist.html'">
+                BECOME A SCIENTIST
+            </button>
+
+        </div>
+
+    </div>
+
+</body>
+</html>

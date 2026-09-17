@@ -1,0 +1,1224 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+<title>Little Scientists - Scientist Page</title>
+
+
+<style>
+
+/* =========================
+   BASIC
+========================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+
+    background: #f7f8fa;
+
+    color: #17202a;
+
+    min-height: 100vh;
+}
+
+
+/* =========================
+   TOP NAVIGATION
+========================= */
+
+.topbar {
+
+    height: 65px;
+
+    background: white;
+
+    border-bottom: 1px solid #ddd;
+
+    display: flex;
+
+    align-items: center;
+
+    padding: 0 30px;
+
+    gap: 45px;
+
+}
+
+
+.logo {
+
+    font-size: 23px;
+
+    font-weight: bold;
+
+}
+
+
+.logo span {
+
+    color: #f5a623;
+
+}
+
+
+.nav {
+
+    display: flex;
+
+    gap: 30px;
+
+    color: #555;
+
+    font-size: 16px;
+
+}
+
+
+.nav div {
+
+    cursor: pointer;
+
+}
+
+
+.nav div:hover {
+
+    color: #f5a623;
+
+}
+
+
+/* =========================
+   MAIN AREA
+========================= */
+
+.main {
+
+    max-width: 1150px;
+
+    margin: auto;
+
+    padding: 35px 30px;
+
+}
+
+
+/* =========================
+   WELCOME SECTION
+========================= */
+
+.welcome {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    margin-bottom: 25px;
+
+}
+
+
+.welcome h1 {
+
+    font-size: 31px;
+
+    margin-bottom: 8px;
+
+}
+
+
+.welcome p {
+
+    color: #737b83;
+
+    font-size: 15px;
+
+}
+
+
+.points {
+
+    background: white;
+
+    border: 1px solid #ddd;
+
+    border-radius: 12px;
+
+    padding: 14px 25px;
+
+    text-align: center;
+
+}
+
+
+.points-title {
+
+    font-size: 12px;
+
+    color: #777;
+
+}
+
+
+.points-number {
+
+    font-size: 27px;
+
+    font-weight: bold;
+
+    color: #f5a623;
+
+    margin-top: 4px;
+
+}
+
+
+/* =========================
+   BADGE BUTTON
+========================= */
+
+.badge-button {
+
+    background: white;
+
+    border: 1px solid #ddd;
+
+    border-radius: 14px;
+
+    width: 100%;
+
+    padding: 18px 22px;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    cursor: pointer;
+
+    font-size: 18px;
+
+    font-weight: bold;
+
+    margin-bottom: 15px;
+
+}
+
+
+.badge-button:hover {
+
+    background: #fafafa;
+
+}
+
+
+.badge-arrow {
+
+    font-size: 20px;
+
+    transition: 0.3s;
+
+}
+
+
+/* =========================
+   BADGE SECTION
+========================= */
+
+.badge-section {
+
+    display: none;
+
+    background: white;
+
+    border: 1px solid #ddd;
+
+    border-radius: 14px;
+
+    padding: 20px;
+
+    margin-bottom: 35px;
+
+}
+
+
+.badge-section.show {
+
+    display: block;
+
+}
+
+
+.badges {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(5, 1fr);
+
+    gap: 12px;
+
+}
+
+
+.badge {
+
+    border: 1px solid #ddd;
+
+    border-radius: 12px;
+
+    padding: 18px 8px;
+
+    text-align: center;
+
+    min-height: 155px;
+
+}
+
+
+.badge-icon {
+
+    font-size: 38px;
+
+    margin-bottom: 10px;
+
+}
+
+
+.badge-name {
+
+    font-size: 14px;
+
+    font-weight: bold;
+
+    margin-bottom: 7px;
+
+}
+
+
+.badge-points {
+
+    color: #777;
+
+    font-size: 12px;
+
+}
+
+
+.badge-status {
+
+    color: #aaa;
+
+    font-size: 11px;
+
+    margin-top: 9px;
+
+}
+
+
+/* UNLOCKED BADGE */
+
+.badge.unlocked {
+
+    border: 2px solid #f5a623;
+
+    background: #fffaf0;
+
+}
+
+
+.badge.unlocked .badge-status {
+
+    color: #e49b00;
+
+    font-weight: bold;
+
+}
+
+
+/* =========================
+   EXPERIMENT TITLE
+========================= */
+
+.experiment-title {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    margin-bottom: 18px;
+
+}
+
+
+.experiment-title h2 {
+
+    font-size: 23px;
+
+}
+
+
+.search {
+
+    width: 230px;
+
+    padding: 11px 15px;
+
+    border: 1px solid #ddd;
+
+    border-radius: 10px;
+
+    outline: none;
+
+}
+
+
+/* =========================
+   EXPERIMENT CARD
+========================= */
+
+.experiment {
+
+    background: white;
+
+    border: 1px solid #ddd;
+
+    border-radius: 14px;
+
+    padding: 18px 22px;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    margin-bottom: 12px;
+
+    transition: 0.2s;
+
+}
+
+
+.experiment:hover {
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 5px 15px rgba(0,0,0,0.07);
+
+}
+
+
+.experiment-left {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 18px;
+
+}
+
+
+.experiment-icon {
+
+    width: 55px;
+
+    height: 55px;
+
+    border-radius: 12px;
+
+    background: #f1f3f5;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-size: 28px;
+
+}
+
+
+.experiment-name {
+
+    font-weight: bold;
+
+    font-size: 17px;
+
+}
+
+
+.experiment-info {
+
+    color: #777;
+
+    font-size: 13px;
+
+    margin-top: 5px;
+
+}
+
+
+.xp {
+
+    color: #f5a623;
+
+    font-weight: bold;
+
+    margin-right: 18px;
+
+}
+
+
+.start {
+
+    border: none;
+
+    background: #17202a;
+
+    color: white;
+
+    padding: 10px 17px;
+
+    border-radius: 8px;
+
+    cursor: pointer;
+
+}
+
+
+.start:hover {
+
+    background: #f5a623;
+
+    color: black;
+
+}
+
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media(max-width: 900px) {
+
+    .badges {
+
+        grid-template-columns:
+            repeat(3, 1fr);
+
+    }
+
+}
+
+
+@media(max-width: 600px) {
+
+    .topbar {
+
+        gap: 15px;
+
+        padding: 0 15px;
+
+    }
+
+
+    .nav {
+
+        display: none;
+
+    }
+
+
+    .welcome {
+
+        flex-direction: column;
+
+        align-items: flex-start;
+
+        gap: 20px;
+
+    }
+
+
+    .badges {
+
+        grid-template-columns:
+            repeat(2, 1fr);
+
+    }
+
+
+    .experiment-title {
+
+        flex-direction: column;
+
+        align-items: flex-start;
+
+        gap: 15px;
+
+    }
+
+
+    .search {
+
+        width: 100%;
+
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- =========================
+     TOP BAR
+========================= -->
+
+<div class="topbar">
+
+    <div class="logo">
+
+        🔬 Little <span>Scientists</span>
+
+    </div>
+
+
+    <div class="nav">
+
+        <div>Labs</div>
+
+        <div>Quest</div>
+
+        <div>Explore</div>
+
+        <div>Study Plan</div>
+
+    </div>
+
+</div>
+
+
+
+<!-- =========================
+     MAIN
+========================= -->
+
+<div class="main">
+
+
+    <!-- WELCOME -->
+
+    <div class="welcome">
+
+        <div>
+
+            <h1>
+                Welcome, Scientist 🧪
+            </h1>
+
+            <p>
+                Complete experiments and discover
+                how far your scientific journey can go.
+            </p>
+
+        </div>
+
+
+        <div class="points">
+
+            <div class="points-title">
+                YOUR POINTS
+            </div>
+
+            <div class="points-number"
+                 id="totalPoints">
+
+                0
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =========================
+         BADGES BUTTON
+    ========================= -->
+
+    <div class="badge-button"
+         onclick="toggleBadges()">
+
+        <span>
+            🏆 BADGES
+        </span>
+
+        <span class="badge-arrow"
+              id="arrow">
+
+            ▼
+
+        </span>
+
+    </div>
+
+
+
+    <!-- =========================
+         BADGES
+    ========================= -->
+
+    <div class="badge-section"
+         id="badgeSection">
+
+
+        <div class="badges">
+
+
+            <!-- JUNIOR SCIENTISTS -->
+
+            <div class="badge"
+                 id="badge1000">
+
+                <div class="badge-icon">
+                    🔬
+                </div>
+
+                <div class="badge-name">
+                    Junior Scientists
+                </div>
+
+                <div class="badge-points">
+                    1,000 points
+                </div>
+
+                <div class="badge-status">
+                    🔒 Locked
+                </div>
+
+            </div>
+
+
+
+            <!-- EXPERIMENTALISTS -->
+
+            <div class="badge"
+                 id="badge5000">
+
+                <div class="badge-icon">
+                    🧪
+                </div>
+
+                <div class="badge-name">
+                    Experimentalists
+                </div>
+
+                <div class="badge-points">
+                    5,000 points
+                </div>
+
+                <div class="badge-status">
+                    🔒 Locked
+                </div>
+
+            </div>
+
+
+
+            <!-- EVIDENCE HUNTER -->
+
+            <div class="badge"
+                 id="badge10000">
+
+                <div class="badge-icon">
+                    🔎
+                </div>
+
+                <div class="badge-name">
+                    Evidence Hunter
+                </div>
+
+                <div class="badge-points">
+                    10,000 points
+                </div>
+
+                <div class="badge-status">
+                    🔒 Locked
+                </div>
+
+            </div>
+
+
+
+            <!-- RESEARCHER -->
+
+            <div class="badge"
+                 id="badge20000">
+
+                <div class="badge-icon">
+                    🧬
+                </div>
+
+                <div class="badge-name">
+                    Researcher
+                </div>
+
+                <div class="badge-points">
+                    20,000 points
+                </div>
+
+                <div class="badge-status">
+                    🔒 Locked
+                </div>
+
+            </div>
+
+
+
+            <!-- MASTER SCIENTISTS -->
+
+            <div class="badge"
+                 id="badge50000">
+
+                <div class="badge-icon">
+                    👑
+                </div>
+
+                <div class="badge-name">
+                    Master Scientists
+                </div>
+
+                <div class="badge-points">
+                    50,000+ points
+                </div>
+
+                <div class="badge-status">
+                    🔒 Locked
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =========================
+         EXPERIMENTS
+    ========================= -->
+
+    <div class="experiment-title">
+
+        <h2>
+            🧪 Experiments
+        </h2>
+
+
+        <input
+            type="text"
+            class="search"
+            id="searchBox"
+            placeholder="Search experiments..."
+            onkeyup="searchExperiments()"
+        >
+
+    </div>
+
+
+
+    <div id="experimentList">
+
+
+        <!-- EXPERIMENT 1 -->
+
+        <div class="experiment">
+
+            <div class="experiment-left">
+
+                <div class="experiment-icon">
+                    🍦
+                </div>
+
+
+                <div>
+
+                    <div class="experiment-name">
+
+                        The Melting Mystery
+
+                    </div>
+
+
+                    <div class="experiment-info">
+
+                        Heat • Insulation • Materials
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div>
+
+                <span class="xp">
+                    +100 XP
+                </span>
+
+
+                <button
+                    class="start"
+                    onclick="window.location.href='experiment.html'">
+
+                    START
+
+                </button>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- EXPERIMENT 2 PLACEHOLDER -->
+
+        <div class="experiment">
+
+            <div class="experiment-left">
+
+                <div class="experiment-icon">
+                    ⚡
+                </div>
+
+
+                <div>
+
+                    <div class="experiment-name">
+
+                        Solutions
+
+                    </div>
+
+
+                    <div class="experiment-info">
+
+                        Acid.Bases.Salt
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div>
+
+                <span class="xp">
+                    +100 XP
+                </span>
+
+
+                <button class="start"
+
+                    onclick="window.location.href='solutions.html'">
+                    START
+
+
+                </button>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- EXPERIMENT 3 PLACEHOLDER -->
+
+        <div class="experiment">
+
+            <div class="experiment-left">
+
+                <div class="experiment-icon">
+                    🌱
+                </div>
+
+
+                <div>
+
+                    <div class="experiment-name">
+
+                        Ohm's Law
+
+                    </div>
+
+
+                    <div class="experiment-info">
+
+                        voltage current resistance
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div>
+
+                <span class="xp">
+                    +100 XP
+                </span>
+
+
+                 <button class="start"
+
+                    onclick="window.location.href='exp2.html'">
+                    START
+
+            </div>
+
+        </div>
+
+
+
+        <!-- EXPERIMENT 4 PLACEHOLDER -->
+
+        <div class="experiment">
+
+            <div class="experiment-left">
+
+                <div class="experiment-icon">
+                    🚀
+                </div>
+
+
+                <div>
+
+                    <div class="experiment-name">
+
+                        Experiment 04
+
+                    </div>
+
+
+                    <div class="experiment-info">
+
+                        Your next experiment will appear here
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div>
+
+                <span class="xp">
+                    +100 XP
+                </span>
+
+
+                <button class="start">
+
+                    SOON
+
+                </button>
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+</div>
+
+
+
+<script>
+
+
+/* =========================
+   DISPLAY POINTS
+========================= */
+
+let points =
+    parseInt(localStorage.getItem("points")) || 0;
+
+
+document.getElementById("totalPoints").innerText =
+    points;
+
+
+
+/* =========================
+   BADGE SYSTEM
+========================= */
+
+function updateBadges() {
+
+    let points =
+        parseInt(localStorage.getItem("points")) || 0;
+
+
+    checkBadge(
+        "badge1000",
+        points >= 1000
+    );
+
+
+    checkBadge(
+        "badge5000",
+        points >= 5000
+    );
+
+
+    checkBadge(
+        "badge10000",
+        points >= 10000
+    );
+
+
+    checkBadge(
+        "badge20000",
+        points >= 20000
+    );
+
+
+    checkBadge(
+        "badge50000",
+        points >= 50000
+    );
+
+}
+
+
+function checkBadge(id, unlocked) {
+
+    let badge =
+        document.getElementById(id);
+
+    let status =
+        badge.querySelector(".badge-status");
+
+
+    if (unlocked) {
+
+        badge.classList.add("unlocked");
+
+        status.innerHTML =
+            "✓ UNLOCKED";
+
+    }
+
+}
+
+
+updateBadges();
+
+
+
+/* =========================
+   OPEN / CLOSE BADGES
+========================= */
+
+function toggleBadges() {
+
+    let section =
+        document.getElementById("badgeSection");
+
+    let arrow =
+        document.getElementById("arrow");
+
+
+    section.classList.toggle("show");
+
+
+    if (section.classList.contains("show")) {
+
+        arrow.innerHTML = "▲";
+
+    } else {
+
+        arrow.innerHTML = "▼";
+
+    }
+
+}
+
+
+
+/* =========================
+   SEARCH
+========================= */
+
+function searchExperiments() {
+
+    let search =
+        document.getElementById("searchBox")
+        .value
+        .toLowerCase();
+
+
+    let experiments =
+        document.querySelectorAll(".experiment");
+
+
+    experiments.forEach(function(experiment) {
+
+        let text =
+            experiment.innerText.toLowerCase();
+
+
+        if (text.includes(search)) {
+
+            experiment.style.display =
+                "flex";
+
+        } else {
+
+            experiment.style.display =
+                "none";
+
+        }
+
+    });
+
+}
+
+</script>
+
+
+</body>
+
+</html>

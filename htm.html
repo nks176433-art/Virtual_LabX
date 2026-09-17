@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Float Example</title>
+
+    <style>
+        img {
+            /* default value */
+            float: none;
+            width: 100px;
+            height: 120px;
+        }
+
+        div.parent {
+            border: 2px solid black;
+            padding: 20px;
+            width: 500px;
+        } 
+        p.left{
+            text-align: right;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>CSS Float Example</h1>
+
+    <div class="parent">
+
+        <img src="image.png" alt="Sample Image">
+
+        <p>
+            This is some text next to the image. 
+            Since float is set to none, the image remains in the normal
+            document flow and the paragraph appears below it.
+        </p>
+
+    </div>
+
+</body>
+</html>

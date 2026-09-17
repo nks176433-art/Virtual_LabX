@@ -1,0 +1,2046 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Ohm's Law | Little Scientists</title>
+
+<style>
+
+/* =========================
+   BASIC PAGE
+========================= */
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #ffffff;
+    color: #111;
+}
+
+
+/* =========================
+   HEADER
+========================= */
+
+header {
+    background: #111827;
+    color: white;
+    padding: 18px 35px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.xp-box {
+    background: #facc15;
+    color: #111;
+    padding: 10px 18px;
+    border-radius: 20px;
+    font-weight: bold;
+}
+
+
+/* =========================
+   MAIN CONTAINER
+========================= */
+
+.container {
+    width: 92%;
+    max-width: 1250px;
+    margin: auto;
+    padding: 35px 0 80px;
+}
+
+
+/* =========================
+   TITLE
+========================= */
+
+h1 {
+    font-size: 38px;
+    margin-bottom: 5px;
+}
+
+.subtitle {
+    color: #666;
+    font-size: 17px;
+}
+
+
+/* =========================
+   MISSION
+========================= */
+
+.mission {
+    margin-top: 25px;
+
+    background: #f3f4f6;
+    border-left: 6px solid #2563eb;
+
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.mission h2 {
+    margin-top: 0;
+}
+
+
+/* =========================
+   SECTION HEADINGS
+========================= */
+
+.section-title {
+    margin-top: 40px;
+    margin-bottom: 18px;
+
+    font-size: 26px;
+}
+
+
+/* =========================
+   COMPONENT TOOLBOX
+========================= */
+
+.components {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.component {
+    width: 150px;
+    height: 115px;
+
+    border: 2px solid #222;
+    border-radius: 14px;
+
+    background: #f8f8f8;
+
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+
+    font-size: 38px;
+
+    cursor: grab;
+
+    transition: 0.2s;
+}
+
+.component:hover {
+    transform: translateY(-4px);
+    background: #eeeeee;
+}
+
+.component b {
+    font-size: 16px;
+    margin-top: 7px;
+}
+
+
+/* =========================
+   CIRCUIT BOARD
+========================= */
+
+.circuit-board {
+
+    margin-top: 20px;
+
+    min-height: 550px;
+
+    border: 3px dashed #444;
+    border-radius: 15px;
+
+    padding: 35px;
+
+    background:
+        linear-gradient(#eeeeee 1px, transparent 1px),
+        linear-gradient(90deg, #eeeeee 1px, transparent 1px);
+
+    background-size: 30px 30px;
+}
+
+.instruction {
+
+    text-align: center;
+
+    background: white;
+
+    width: fit-content;
+
+    margin: 0 auto 40px;
+
+    padding: 10px 20px;
+
+    border-radius: 20px;
+
+    font-weight: bold;
+}
+
+
+/* =========================
+   MAIN CIRCUIT
+========================= */
+
+.main-circuit {
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    gap: 15px;
+
+    flex-wrap: wrap;
+}
+
+
+/* =========================
+   PLACEHOLDERS
+========================= */
+
+.slot {
+
+    width: 175px;
+    height: 140px;
+
+    border: 3px dashed #888;
+
+    border-radius: 15px;
+
+    background: rgba(255,255,255,0.95);
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    transition: 0.2s;
+}
+
+.slot span {
+    font-size: 40px;
+}
+
+.slot strong {
+    font-size: 18px;
+    margin-top: 5px;
+}
+
+.slot small {
+    color: #777;
+    margin-top: 7px;
+    text-align: center;
+}
+
+
+/* Drag over */
+
+.slot.drag-over {
+
+    transform: scale(1.05);
+
+    border-color: #2563eb;
+
+    background: #dbeafe;
+}
+
+
+/* Correct */
+
+.slot.correct {
+
+    border-color: #16a34a;
+
+    background: #dcfce7;
+}
+
+
+/* =========================
+   ARROWS
+========================= */
+
+.arrow {
+
+    font-size: 35px;
+
+    font-weight: bold;
+}
+
+
+/* =========================
+   VOLTMETER
+========================= */
+
+.voltmeter-area {
+
+    display: flex;
+
+    justify-content: center;
+
+    margin-top: 55px;
+}
+
+.voltmeter-slot {
+
+    width: 230px;
+    height: 150px;
+}
+
+
+/* =========================
+   CHECK BUTTON
+========================= */
+
+.check-btn {
+
+    display: block;
+
+    margin: 40px auto 10px;
+
+    padding: 14px 30px;
+
+    border: none;
+
+    border-radius: 10px;
+
+    background: #111827;
+
+    color: white;
+
+    font-size: 18px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+}
+
+.check-btn:hover {
+    background: #374151;
+}
+
+
+/* =========================
+   RESULT
+========================= */
+
+#result {
+
+    text-align: center;
+
+    font-size: 20px;
+
+    font-weight: bold;
+
+    margin-top: 20px;
+
+    min-height: 30px;
+}
+
+
+/* =========================
+   EXPERIMENT CONTROLS
+========================= */
+
+#experimentControls {
+
+    display: none;
+
+    margin-top: 50px;
+
+    background: #f8fafc;
+
+    border: 2px solid #ddd;
+
+    border-radius: 15px;
+
+    padding: 30px;
+}
+
+.controls-grid {
+
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 30px;
+}
+
+.control-box {
+
+    background: white;
+
+    border: 1px solid #ddd;
+
+    border-radius: 12px;
+
+    padding: 20px;
+}
+
+.control-box h3 {
+    margin-top: 0;
+}
+
+input[type="range"] {
+    width: 100%;
+}
+
+.value {
+
+    font-size: 25px;
+
+    font-weight: bold;
+
+    margin-top: 10px;
+}
+
+
+/* =========================
+   CURRENT DISPLAY
+========================= */
+
+.current-display {
+
+    margin-top: 30px;
+
+    background: #111827;
+
+    color: white;
+
+    padding: 25px;
+
+    border-radius: 15px;
+
+    text-align: center;
+}
+
+.current-display .formula {
+
+    font-size: 20px;
+
+    color: #d1d5db;
+}
+
+.current-value {
+
+    font-size: 42px;
+
+    font-weight: bold;
+
+    margin-top: 10px;
+}
+
+
+/* =========================
+   OBSERVATION TABLE
+========================= */
+
+.observation-section {
+
+    margin-top: 40px;
+}
+
+table {
+
+    width: 100%;
+
+    border-collapse: collapse;
+
+    background: white;
+}
+
+th,
+td {
+
+    border: 1px solid #ccc;
+
+    padding: 12px;
+
+    text-align: center;
+}
+
+th {
+
+    background: #111827;
+
+    color: white;
+}
+
+.record-btn {
+
+    margin-top: 15px;
+
+    padding: 12px 22px;
+
+    border: none;
+
+    border-radius: 8px;
+
+    background: #2563eb;
+
+    color: white;
+
+    font-weight: bold;
+
+    cursor: pointer;
+}
+
+
+/* =========================
+   PREDICTION
+========================= */
+
+.prediction {
+
+    margin-top: 40px;
+
+    background: #fff7ed;
+
+    border-left: 6px solid #f97316;
+
+    padding: 20px;
+
+    border-radius: 10px;
+}
+
+.prediction button {
+
+    padding: 10px 20px;
+
+    margin: 8px;
+
+    border: none;
+
+    border-radius: 8px;
+
+    cursor: pointer;
+
+    font-weight: bold;
+}
+
+
+/* =========================
+   QUIZ
+========================= */
+
+.quiz {
+
+    margin-top: 50px;
+
+    background: #f3f4f6;
+
+    padding: 30px;
+
+    border-radius: 15px;
+}
+
+.question {
+
+    background: white;
+
+    padding: 20px;
+
+    margin-bottom: 20px;
+
+    border-radius: 10px;
+
+    border: 1px solid #ddd;
+}
+
+.question h3 {
+    margin-top: 0;
+}
+
+.option {
+
+    display: block;
+
+    width: 100%;
+
+    text-align: left;
+
+    padding: 12px;
+
+    margin-top: 8px;
+
+    border: 1px solid #ccc;
+
+    background: white;
+
+    border-radius: 8px;
+
+    cursor: pointer;
+}
+
+.option:hover {
+    background: #eeeeee;
+}
+
+.option.correct-answer {
+    background: #dcfce7;
+    border-color: #16a34a;
+}
+
+.option.wrong-answer {
+    background: #fee2e2;
+    border-color: #dc2626;
+}
+
+
+/* =========================
+   COMPLETION
+========================= */
+
+#completion {
+
+    display: none;
+
+    margin-top: 30px;
+
+    padding: 25px;
+
+    background: #dcfce7;
+
+    border: 2px solid #16a34a;
+
+    border-radius: 12px;
+
+    text-align: center;
+
+    font-size: 22px;
+
+    font-weight: bold;
+}
+
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media(max-width: 800px) {
+
+    .controls-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .main-circuit {
+        flex-direction: column;
+    }
+
+    .arrow {
+        transform: rotate(90deg);
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- =========================
+     HEADER
+========================= -->
+
+<header>
+
+    <div class="logo">
+        🧪 Little Scientists
+    </div>
+
+    <div class="xp-box">
+        ⭐ XP: <span id="totalXP">0</span>
+    </div>
+
+</header>
+
+
+
+<div class="container">
+
+
+<!-- =========================
+     TITLE
+========================= -->
+
+<h1>⚡ Ohm's Law Investigation</h1>
+
+<p class="subtitle">
+    Build the circuit, experiment with variables, and discover the relationship between voltage, current and resistance.
+</p>
+
+
+
+<!-- =========================
+     MISSION
+========================= -->
+
+<div class="mission">
+
+    <h2>🔬 Scientist Mission</h2>
+
+    <p>
+        The circuit isn't working! Your task is to build a working circuit
+        and investigate how <b>Voltage (V)</b>, <b>Current (I)</b> and
+        <b>Resistance (R)</b> are related.
+    </p>
+
+    <p>
+        Don't just memorize the formula. Experiment and discover it yourself!
+    </p>
+
+</div>
+
+
+
+<!-- =========================
+     COMPONENTS
+========================= -->
+
+<h2 class="section-title">
+    🧩 Components
+</h2>
+
+
+<div class="components">
+
+
+    <div class="component"
+         draggable="true"
+         data-type="battery">
+
+        🔋
+
+        <b>Battery</b>
+
+    </div>
+
+
+
+    <div class="component"
+         draggable="true"
+         data-type="switch">
+
+        ⏻
+
+        <b>Switch</b>
+
+    </div>
+
+
+
+    <div class="component"
+         draggable="true"
+         data-type="ammeter">
+
+        ⚡
+
+        <b>Ammeter</b>
+
+    </div>
+
+
+
+    <div class="component"
+         draggable="true"
+         data-type="resistor">
+
+        〰️
+
+        <b>Resistor</b>
+
+    </div>
+
+
+
+    <div class="component"
+         draggable="true"
+         data-type="voltmeter">
+
+        🔵
+
+        <b>Voltmeter</b>
+
+    </div>
+
+
+</div>
+
+
+
+<!-- =========================
+     CIRCUIT BOARD
+========================= -->
+
+<h2 class="section-title">
+    🔧 Build the Circuit
+</h2>
+
+
+<div class="circuit-board">
+
+
+    <div class="instruction">
+
+        Drag each component into its correct placeholder.
+
+    </div>
+
+
+
+    <!-- MAIN CIRCUIT -->
+
+    <div class="main-circuit">
+
+
+        <!-- BATTERY -->
+
+        <div class="slot"
+             data-type="battery">
+
+            <span>🔋</span>
+
+            <strong>Battery</strong>
+
+            <small>
+                Drop Battery here
+            </small>
+
+        </div>
+
+
+
+        <div class="arrow">
+            →
+        </div>
+
+
+
+        <!-- SWITCH -->
+
+        <div class="slot"
+             data-type="switch">
+
+            <span>⏻</span>
+
+            <strong>Switch</strong>
+
+            <small>
+                Drop Switch here
+            </small>
+
+        </div>
+
+
+
+        <div class="arrow">
+            →
+        </div>
+
+
+
+        <!-- AMMETER -->
+
+        <div class="slot"
+             data-type="ammeter">
+
+            <span>⚡</span>
+
+            <strong>Ammeter</strong>
+
+            <small>
+                Drop Ammeter here
+            </small>
+
+        </div>
+
+
+
+        <div class="arrow">
+            →
+        </div>
+
+
+
+        <!-- RESISTOR -->
+
+        <div class="slot"
+             data-type="resistor">
+
+            <span>〰️</span>
+
+            <strong>Resistor</strong>
+
+            <small>
+                Drop Resistor here
+            </small>
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- VOLTMETER -->
+
+    <div class="voltmeter-area">
+
+        <div class="slot voltmeter-slot"
+             data-type="voltmeter">
+
+            <span>🔵</span>
+
+            <strong>Voltmeter</strong>
+
+            <small>
+                Drop Voltmeter here<br>
+                Across the resistor
+            </small>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- CHECK -->
+
+    <button class="check-btn"
+            onclick="checkCircuit()">
+
+        🔍 Check Circuit
+
+    </button>
+
+
+
+    <div id="result"></div>
+
+
+</div>
+
+
+
+<!-- =========================
+     EXPERIMENT CONTROLS
+========================= -->
+
+<div id="experimentControls">
+
+
+    <h2>⚡ Experiment Controls</h2>
+
+    <p>
+        Now change the voltage and resistance.
+        Observe what happens to the current.
+    </p>
+
+
+
+    <div class="controls-grid">
+
+
+        <!-- VOLTAGE -->
+
+        <div class="control-box">
+
+            <h3>🔋 Voltage</h3>
+
+            <input
+                type="range"
+                id="voltage"
+                min="3"
+                max="12"
+                step="3"
+                value="6"
+                oninput="calculateCurrent()"
+            >
+
+            <div class="value">
+
+                V = <span id="voltageValue">6</span> V
+
+            </div>
+
+        </div>
+
+
+
+        <!-- RESISTANCE -->
+
+        <div class="control-box">
+
+            <h3>〰️ Resistance</h3>
+
+            <input
+                type="range"
+                id="resistance"
+                min="2"
+                max="12"
+                step="2"
+                value="6"
+                oninput="calculateCurrent()"
+            >
+
+            <div class="value">
+
+                R = <span id="resistanceValue">6</span> Ω
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- CURRENT -->
+
+    <div class="current-display">
+
+        <div class="formula">
+
+            Ohm's Law: I = V ÷ R
+
+        </div>
+
+        <div class="current-value">
+
+            I = <span id="currentValue">1</span> A
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =========================
+         OBSERVATIONS
+    ========================= -->
+
+    <div class="observation-section">
+
+        <h2>📊 Record Your Observations</h2>
+
+        <p>
+            Change the voltage or resistance and record at least
+            <b>3 observations</b>.
+        </p>
+
+
+        <table>
+
+            <thead>
+
+                <tr>
+
+                    <th>Observation</th>
+
+                    <th>Voltage (V)</th>
+
+                    <th>Resistance (Ω)</th>
+
+                    <th>Current (A)</th>
+
+                </tr>
+
+            </thead>
+
+
+            <tbody id="observationBody">
+
+            </tbody>
+
+        </table>
+
+
+        <button
+            class="record-btn"
+            onclick="recordObservation()">
+
+            ➕ Record Observation
+
+        </button>
+
+
+    </div>
+
+
+
+    <!-- =========================
+         PREDICTION
+    ========================= -->
+
+    <div class="prediction">
+
+        <h2>🧠 Scientist Prediction</h2>
+
+        <p>
+            If voltage increases while resistance stays constant,
+            what do you think will happen to current?
+        </p>
+
+
+        <button onclick="predictionAnswer('increase')">
+            📈 Current increases
+        </button>
+
+
+        <button onclick="predictionAnswer('decrease')">
+            📉 Current decreases
+        </button>
+
+
+        <button onclick="predictionAnswer('same')">
+            ➖ Current stays the same
+        </button>
+
+
+        <p id="predictionResult"></p>
+
+    </div>
+
+
+
+    <!-- =========================
+         QUIZ
+    ========================= -->
+
+    <div class="quiz">
+
+        <h2>🧪 Final Scientist Challenge</h2>
+
+        <p>
+            Answer all 5 questions to complete the experiment.
+        </p>
+
+
+
+        <!-- QUESTION 1 -->
+
+        <div class="question">
+
+            <h3>
+                1. If voltage increases while resistance remains constant,
+                what happens to current?
+            </h3>
+
+
+            <button class="option"
+                onclick="answerQuestion(this, true)">
+                A. Current increases
+            </button>
+
+
+            <button class="option"
+                onclick="answerQuestion(this, false)">
+                B. Current decreases
+            </button>
+
+
+            <button class="option"
+                onclick="answerQuestion(this, false)">
+                C. Current becomes zero
+            </button>
+
+
+        </div>
+
+
+
+        <!-- QUESTION 2 -->
+
+        <div class="question">
+
+            <h3>
+                2. A circuit has V = 12 V and R = 6 Ω.
+                What is the current?
+            </h3>
+
+
+            <button class="option"
+                onclick="answerQuestion(this, false)">
+                A. 0.5 A
+            </button>
+
+
+            <button class="option"
+                onclick="answerQuestion(this, true)">
+                B. 2 A
+            </button>
+
+
+            <button class="option"
+                onclick="answerQuestion(this, false)">
+                C. 18 A
+            </button>
+
+
+        </div>
+
+
+
+        <!-- QUESTION 3 -->
+
+        <div class="question">
+
+            <h3>
+                3. If resistance increases while voltage remains constant,
+                what happens to current?
+            </h3>
+
+
+            <button class="option"
+                onclick="answerQuestion(this, false)">
+                A. Current increases
+            </button>
+
+
+            <button class="option"
+                onclick="answerQuestion(this, true)">
+                B. Current decreases
+            </button>
+
+
+            <button class="option"
+                onclick="answerQuestion(this, false)">
+                C. Current always becomes zero
+            </button>
+
+
+        </div>
+
+
+
+        <!-- QUESTION 4 -->
+
+        <div class="question">
+
+            <h3>
+                4. If current is 3 A and resistance is 4 Ω,
+                what is the voltage?
+            </h3>
+
+
+            <button class="option"
+                onclick="answerQuestion(this, true)">
+                A. 12 V
+            </button>
+
+
+            <button class="option"
+                onclick="answerQuestion(this, false)">
+                B. 7 V
+            </button>
+
+
+            <button class="option"
+                onclick="answerQuestion(this, false)">
+                C. 1.33 V
+            </button>
+
+
+        </div>
+
+
+
+        <!-- QUESTION 5 -->
+
+        <div class="question">
+
+            <h3>
+                5. Which formula represents Ohm's Law?
+            </h3>
+
+
+            <button class="option"
+                onclick="answerQuestion(this, false)">
+                A. I = V × R
+            </button>
+
+
+            <button class="option"
+                onclick="answerQuestion(this, true)">
+                B. V = I × R
+            </button>
+
+
+            <button class="option"
+                onclick="answerQuestion(this, false)">
+                C. R = V × I
+            </button>
+
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- =========================
+         COMPLETION
+    ========================= -->
+
+    <div id="completion">
+
+        🎉 Experiment Completed!
+
+        <br><br>
+
+        You investigated Ohm's Law like a scientist.
+
+        <br><br>
+
+        ⭐ +500 XP
+
+    </div>
+
+
+</div>
+
+
+</div>
+
+
+
+<script>
+
+/* =====================================================
+   LOAD XP
+===================================================== */
+
+let totalXP =
+    Number(localStorage.getItem("labXP")) || 0;
+
+document.getElementById("totalXP").textContent =
+    totalXP;
+
+
+
+/* =====================================================
+   DRAG AND DROP
+===================================================== */
+
+let draggedComponent = null;
+
+
+/* COMPONENT DRAG START */
+
+document
+    .querySelectorAll(".component")
+    .forEach(component => {
+
+        component.addEventListener(
+            "dragstart",
+            function(event) {
+
+                draggedComponent =
+                    this.dataset.type;
+
+                event.dataTransfer.setData(
+                    "text/plain",
+                    draggedComponent
+                );
+
+            }
+        );
+
+    });
+
+
+
+/* PLACEHOLDER DRAG EVENTS */
+
+document
+    .querySelectorAll(".slot")
+    .forEach(slot => {
+
+
+        slot.addEventListener(
+            "dragover",
+            function(event) {
+
+                event.preventDefault();
+
+                this.classList.add(
+                    "drag-over"
+                );
+
+            }
+        );
+
+
+        slot.addEventListener(
+            "dragleave",
+            function() {
+
+                this.classList.remove(
+                    "drag-over"
+                );
+
+            }
+        );
+
+
+        slot.addEventListener(
+            "drop",
+            function(event) {
+
+                event.preventDefault();
+
+                this.classList.remove(
+                    "drag-over"
+                );
+
+
+                let type =
+                    event.dataTransfer
+                    .getData("text/plain");
+
+
+                let correctType =
+                    this.dataset.type;
+
+
+                if (type === correctType) {
+
+
+                    this.innerHTML = `
+
+                        <span>
+                            ${getIcon(type)}
+                        </span>
+
+                        <strong>
+                            ${getName(type)}
+                        </strong>
+
+                        <small>
+                            ✓ Correct placement
+                        </small>
+
+                    `;
+
+
+                    this.dataset.filled =
+                        "true";
+
+
+                    this.classList.add(
+                        "correct"
+                    );
+
+
+                }
+
+                else {
+
+                    alert(
+                        "❌ Wrong component!\n\n" +
+                        "Try placing the correct component here."
+                    );
+
+                }
+
+            }
+        );
+
+    });
+
+
+
+/* =====================================================
+   ICON FUNCTION
+===================================================== */
+
+function getIcon(type) {
+
+    if (type === "battery")
+        return "🔋";
+
+    if (type === "switch")
+        return "⏻";
+
+    if (type === "ammeter")
+        return "⚡";
+
+    if (type === "resistor")
+        return "〰️";
+
+    if (type === "voltmeter")
+        return "🔵";
+
+}
+
+
+
+/* =====================================================
+   NAME FUNCTION
+===================================================== */
+
+function getName(type) {
+
+    if (type === "battery")
+        return "Battery";
+
+    if (type === "switch")
+        return "Switch";
+
+    if (type === "ammeter")
+        return "Ammeter";
+
+    if (type === "resistor")
+        return "Resistor";
+
+    if (type === "voltmeter")
+        return "Voltmeter";
+
+}
+
+
+
+/* =====================================================
+   CHECK CIRCUIT
+===================================================== */
+
+function checkCircuit() {
+
+    let slots =
+        document.querySelectorAll(".slot");
+
+    let correct = true;
+
+
+    slots.forEach(slot => {
+
+        if (
+            slot.dataset.filled !==
+            "true"
+        ) {
+
+            correct = false;
+
+        }
+
+    });
+
+
+    let result =
+        document.getElementById("result");
+
+
+    if (correct) {
+
+
+        result.innerHTML =
+            "✅ Circuit built correctly! " +
+            "You can now begin the investigation.";
+
+
+        result.style.color =
+            "#16a34a";
+
+
+        document.getElementById(
+            "experimentControls"
+        ).style.display = "block";
+
+
+        calculateCurrent();
+
+
+        document
+            .getElementById("experimentControls")
+            .scrollIntoView({
+                behavior: "smooth"
+            });
+
+
+    }
+
+    else {
+
+
+        result.innerHTML =
+            "❌ The circuit is incomplete. " +
+            "Place all five components correctly.";
+
+
+        result.style.color =
+            "#dc2626";
+
+    }
+
+}
+
+
+
+/* =====================================================
+   CALCULATE CURRENT
+===================================================== */
+
+function calculateCurrent() {
+
+
+    let voltage =
+        Number(
+            document.getElementById(
+                "voltage"
+            ).value
+        );
+
+
+    let resistance =
+        Number(
+            document.getElementById(
+                "resistance"
+            ).value
+        );
+
+
+    let current =
+        voltage / resistance;
+
+
+    document.getElementById(
+        "voltageValue"
+    ).textContent =
+        voltage;
+
+
+    document.getElementById(
+        "resistanceValue"
+    ).textContent =
+        resistance;
+
+
+    document.getElementById(
+        "currentValue"
+    ).textContent =
+        current.toFixed(2);
+
+}
+
+
+
+/* =====================================================
+   RECORD OBSERVATION
+===================================================== */
+
+let observationNumber = 0;
+
+
+function recordObservation() {
+
+
+    observationNumber++;
+
+
+    let voltage =
+        Number(
+            document.getElementById(
+                "voltage"
+            ).value
+        );
+
+
+    let resistance =
+        Number(
+            document.getElementById(
+                "resistance"
+            ).value
+        );
+
+
+    let current =
+        voltage / resistance;
+
+
+    let row =
+        document.createElement("tr");
+
+
+    row.innerHTML = `
+
+        <td>
+            ${observationNumber}
+        </td>
+
+        <td>
+            ${voltage}
+        </td>
+
+        <td>
+            ${resistance}
+        </td>
+
+        <td>
+            ${current.toFixed(2)}
+        </td>
+
+    `;
+
+
+    document
+        .getElementById(
+            "observationBody"
+        )
+        .appendChild(row);
+
+
+    if (observationNumber >= 3) {
+
+        document.querySelector(
+            ".prediction"
+        ).style.display = "block";
+
+    }
+
+}
+
+
+
+/* =====================================================
+   PREDICTION
+===================================================== */
+
+function predictionAnswer(answer) {
+
+
+    let result =
+        document.getElementById(
+            "predictionResult"
+        );
+
+
+    if (answer === "increase") {
+
+        result.innerHTML =
+            "✅ Correct! According to Ohm's Law, " +
+            "current increases when voltage increases " +
+            "while resistance remains constant.";
+
+        result.style.color =
+            "#16a34a";
+
+    }
+
+    else {
+
+        result.innerHTML =
+            "❌ Not quite. Try looking at your observations " +
+            "and compare current when voltage changes.";
+
+        result.style.color =
+            "#dc2626";
+
+    }
+
+}
+
+
+
+/* =====================================================
+   QUIZ
+===================================================== */
+
+let answeredQuestions = 0;
+
+let questionAnswered =
+    new Set();
+
+
+function answerQuestion(
+    button,
+    correct
+) {
+
+
+    let question =
+        button.closest(".question");
+
+
+    let questionIndex =
+        Array.from(
+            document.querySelectorAll(
+                ".question"
+            )
+        ).indexOf(question);
+
+
+    /* Prevent answering twice */
+
+    if (
+        questionAnswered.has(
+            questionIndex
+        )
+    ) {
+
+        return;
+
+    }
+
+
+    questionAnswered.add(
+        questionIndex
+    );
+
+
+    if (correct) {
+
+
+        button.classList.add(
+            "correct-answer"
+        );
+
+
+        answeredQuestions++;
+
+
+        /* +100 XP for each question */
+
+        totalXP += 100;
+
+
+        localStorage.setItem(
+            "labXP",
+            totalXP
+        );
+
+
+        document.getElementById(
+            "totalXP"
+        ).textContent =
+            totalXP;
+
+
+    }
+
+    else {
+
+
+        button.classList.add(
+            "wrong-answer"
+        );
+
+
+        /* Show correct answer */
+
+        let options =
+            question.querySelectorAll(
+                ".option"
+            );
+
+
+        options.forEach(option => {
+
+            if (
+                option.onclick
+            ) {
+
+                let text =
+                    option.innerText;
+
+                /*
+                   The correct option
+                   has the word we expect.
+                */
+
+                if (
+                    text.includes(
+                        "Current increases"
+                    ) &&
+                    questionIndex === 0
+                ) {
+                    option.classList.add(
+                        "correct-answer"
+                    );
+                }
+
+                if (
+                    text.includes("2 A") &&
+                    questionIndex === 1
+                ) {
+                    option.classList.add(
+                        "correct-answer"
+                    );
+                }
+
+                if (
+                    text.includes(
+                        "Current decreases"
+                    ) &&
+                    questionIndex === 2
+                ) {
+                    option.classList.add(
+                        "correct-answer"
+                    );
+                }
+
+                if (
+                    text.includes("12 V") &&
+                    questionIndex === 3
+                ) {
+                    option.classList.add(
+                        "correct-answer"
+                    );
+                }
+
+                if (
+                    text.includes(
+                        "V = I × R"
+                    ) &&
+                    questionIndex === 4
+                ) {
+                    option.classList.add(
+                        "correct-answer"
+                    );
+                }
+
+            }
+
+        });
+
+    }
+
+
+    /* Check completion */
+
+    if (
+        answeredQuestions === 5
+    ) {
+
+        completeExperiment();
+
+    }
+
+}
+
+
+
+/* =====================================================
+   COMPLETE EXPERIMENT
+===================================================== */
+
+function completeExperiment() {
+
+
+    /*
+       Important:
+       Only give the experiment completion
+       XP once.
+    */
+
+    let alreadyCompleted =
+        localStorage.getItem(
+            "ohmsSolved"
+        );
+
+
+    if (
+        alreadyCompleted === "true"
+    ) {
+
+        document.getElementById(
+            "completion"
+        ).style.display = "block";
+
+
+        return;
+
+    }
+
+
+    /*
+       The five quiz questions already
+       gave 500 XP total.
+
+       So we DO NOT add another 500 here.
+    */
+
+    localStorage.setItem(
+        "ohmsSolved",
+        "true"
+    );
+
+
+    document.getElementById(
+        "completion"
+    ).style.display = "block";
+
+
+    document.getElementById(
+        "completion"
+    ).scrollIntoView({
+        behavior: "smooth"
+    });
+
+}
+
+
+
+/* =====================================================
+   PAGE LOAD
+===================================================== */
+
+window.addEventListener(
+    "load",
+    function() {
+
+        /*
+           If experiment was already completed,
+           show solved status.
+        */
+
+        if (
+            localStorage.getItem(
+                "ohmsSolved"
+            ) === "true"
+        ) {
+
+            console.log(
+                "Ohm's Law experiment already completed."
+            );
+
+        }
+
+    }
+);
+
+</script>
+
+
+</body>
+
+</html>

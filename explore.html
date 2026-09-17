@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>Explore - Little Scientists</title>
+
+    <style>
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #05070b;
+            color: white;
+            text-align: center;
+        }
+
+        .container {
+            padding-top: 70px;
+            padding-bottom: 60px;
+        }
+
+        h1 {
+            font-size: 50px;
+            color: #9ec5e8;
+        }
+
+        .subtitle {
+            font-size: 20px;
+            color: #aeb6c2;
+        }
+
+        .mission {
+            margin: 40px auto;
+            padding: 30px;
+            width: 80%;
+            max-width: 800px;
+            background: #101722;
+            border: 1px solid #26384d;
+            border-radius: 15px;
+        }
+
+        .mission > h2 {
+            color: #9ec5e8;
+        }
+
+        .mission > p {
+            font-size: 18px;
+            color: #aeb6c2;
+        }
+
+
+        /* EXPERIMENT CARDS */
+
+        .mission-card {
+
+            margin: 25px auto;
+            padding: 25px;
+
+            background: #172231;
+
+            border: 1px solid #30445c;
+
+            border-radius: 15px;
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 20px;
+
+            text-align: left;
+
+            transition: 0.3s;
+
+        }
+
+
+        .mission-card:hover {
+
+            transform: translateY(-5px);
+
+            border-color: #9ec5e8;
+
+            box-shadow: 0 8px 25px rgba(80,140,200,0.15);
+
+        }
+
+
+        .mission-icon {
+
+            font-size: 45px;
+
+            min-width: 65px;
+
+            text-align: center;
+
+        }
+
+
+        .mission-info {
+
+            flex: 1;
+
+        }
+
+
+        .mission-info h2 {
+
+            margin: 0 0 8px 0;
+
+            color: white;
+
+        }
+
+
+        .mission-info p {
+
+            margin: 0 0 12px 0;
+
+            color: #aeb6c2;
+
+            line-height: 1.5;
+
+        }
+
+
+        .mission-status {
+
+            font-size: 14px;
+
+            font-weight: bold;
+
+            color: #ffb84d;
+
+        }
+
+
+        button {
+
+            padding: 14px 25px;
+
+            background: #9ec5e8;
+
+            color: #05070b;
+
+            border: none;
+
+            border-radius: 8px;
+
+            font-size: 15px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+
+            transition: 0.2s;
+
+            min-width: 100px;
+
+        }
+
+
+        button:hover {
+
+            transform: translateY(-3px);
+
+            background: #c1dcf2;
+
+        }
+
+
+        button:disabled {
+
+            cursor: default;
+
+        }
+
+
+        /* XP */
+
+        .xp {
+
+            margin: 25px auto;
+
+            padding: 15px;
+
+            width: 250px;
+
+            background: #0c1119;
+
+            border: 1px solid #26384d;
+
+            border-radius: 12px;
+
+            color: #9ec5e8;
+
+            font-weight: bold;
+
+        }
+
+
+        /* MOBILE */
+
+        @media (max-width: 700px) {
+
+            h1 {
+                font-size: 38px;
+            }
+
+            .mission {
+                width: 85%;
+                padding: 20px;
+            }
+
+            .mission-card {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .mission-info {
+                width: 100%;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<div class="container">
+
+
+    <h1>Welcome, Scientist 🧪</h1>
+
+    <p class="subtitle">
+        Your journey of discovery begins here.
+    </p>
+
+
+    <div class="xp">
+
+        ⭐ Scientist XP:
+        <span id="xp">0</span> / 1000
+
+    </div>
+
+
+    <div class="mission">
+
+
+        <h2>🔬 Choose Your Mission</h2>
+
+
+        <p>
+            Investigate mysteries, perform experiments,
+            collect evidence and solve scientific problems.
+        </p>
+
+
+
+        <!-- =========================
+             EXPERIMENT 01
+        ========================== -->
+
+
+        <div class="mission-card">
+
+
+            <div class="mission-icon">
+                🍦
+            </div>
+
+
+            <div class="mission-info">
+
+
+                <h2>
+                    Solve your first mission.
+                </h2>
+
+
+                
+
+
+            </div>
+
+
+            <button
+                id="experiment1Button"
+                type="button"
+                onclick="window.location.href='experiment.html'">
+
+                START
+
+            </button>
+
+
+
+
+        </div>
+
+
+    </div>
+
+
+</div>
+
+
+
+<script>
+
+
+/* =================================
+   EXPERIMENT 01
+================================= */
+
+
+function updateExperiment1Status() {
+
+
+    let solved =
+        localStorage.getItem("experiment1Solved") === "true";
+
+
+    let status =
+        document.getElementById("experiment1Status");
+
+
+    let button =
+        document.getElementById("experiment1Button");
+
+
+    if (solved) {
+
+
+        status.innerHTML =
+            "✅ SOLVED";
+
+
+        status.style.color =
+            "#2e9d62";
+
+
+        button.innerHTML =
+            "SOLVED";
+
+
+        button.disabled =
+            true;
+
+
+        button.style.background =
+            "#2e9d62";
+
+
+        button.style.color =
+            "white";
+
+
+        button.style.cursor =
+            "default";
+
+    }
+
+}
+
+
+
+/* =================================
+   EXPERIMENT 02
+================================= */
+
+
+function updateExperiment2Status() {
+
+
+    let solved =
+        localStorage.getItem("experiment2Solved") === "true";
+
+
+    let status =
+        document.getElementById("experiment2Status");
+
+
+    let button =
+        document.getElementById("experiment2Button");
+
+
+    if (solved) {
+
+
+        status.innerHTML =
+            "✅ SOLVED";
+
+
+        status.style.color =
+            "#2e9d62";
+
+
+        button.innerHTML =
+            "SOLVED";
+
+
+        button.disabled =
+            true;
+
+
+        button.style.background =
+            "#2e9d62";
+
+
+        button.style.color =
+            "white";
+
+
+        button.style.cursor =
+            "default";
+
+
+    }
+
+}
+
+
+
+/* =================================
+   OPEN EXPERIMENT 02
+================================= */
+
+
+document
+    .getElementById("experiment2Button")
+    .addEventListener("click", function() {
+
+
+        window.location.href =
+            "exp2.html";
+
+
+    });
+
+
+
+/* =================================
+   XP
+================================= */
+
+
+function updateXP() {
+
+
+    let xp1 =
+        localStorage.getItem("experiment1XP");
+
+
+
+
+    xp1 =
+        xp1 ? Number(xp1) : 0;
+
+
+    xp2 =
+        xp2 ? Number(xp2) : 0;
+
+
+    document.getElementById("xp").innerHTML =
+        xp1 + xp2;
+
+}
+
+
+
+/* =================================
+   START
+================================= */
+
+
+updateExperiment1Status();
+
+
+updateXP();
+
+
+</script>
+
+
+</body>
+
+</html>
